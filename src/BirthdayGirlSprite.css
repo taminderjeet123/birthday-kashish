@@ -1,0 +1,77 @@
+.birthday-girl-sprite {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+
+  background-image: url("/gollu-girl-sprite.png");
+  background-repeat: no-repeat;
+  background-size: 400% 200%;
+  background-position:
+    var(--sprite-x, 100%)
+    var(--sprite-y, 100%);
+
+  background-color: transparent;
+  filter: drop-shadow(0 5px 0 rgba(23, 23, 23, 0.07));
+  transform-origin: center bottom;
+  animation: girl-idle-bob 2.4s ease-in-out infinite;
+
+  will-change: background-position, transform;
+}
+
+@keyframes girl-idle-bob {
+  0%, 100% {
+    transform: translateY(0) rotate(-0.6deg);
+  }
+
+  45% {
+    transform: translateY(-5px) rotate(0.8deg);
+  }
+
+  70% {
+    transform: translateY(-1px) rotate(-0.2deg);
+  }
+}
+
+/* Larger girl illustration on the first scene. */
+.girl-sprite-position {
+  position: absolute;
+  z-index: 3;
+  left: 1.5%;
+  top: 15.5%;
+  width: clamp(250px, 24vw, 430px);
+  pointer-events: none;
+}
+
+/* Remove any backing box from the old wrapper. */
+.girl-sticker-wrap,
+.cover-sticker-wrap.girl-sticker-wrap {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 900px) {
+  .girl-sprite-position {
+    width: clamp(190px, 25vw, 280px);
+    left: 1%;
+    top: 14%;
+  }
+}
+
+@media (max-width: 600px) {
+  .girl-sprite-position {
+    width: min(43vw, 190px);
+    left: 1%;
+    top: 78px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .birthday-girl-sprite {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,67 @@
+/* Reusable transparent 24-particle atlas overlay.
+   Sprite atlas: 1536x1024px; 6 columns x 4 rows; cells are 256x256px. */
+.birthday-particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.birthday-particle {
+  position: absolute;
+  display: block;
+background-image: url("/party-particle-atlas.png");
+  background-repeat: no-repeat;
+  background-size: 600% 400%;
+  background-position: var(--particle-x, 0%) var(--particle-y, 0%);
+  opacity: .88;
+  transform-origin: center;
+  filter: drop-shadow(0 2px 2px rgba(23, 23, 23, .08));
+  will-change: transform, opacity;
+}
+
+.particle-motion-float { animation-name: particle-float; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.particle-motion-spin { animation-name: particle-spin; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.particle-motion-drift { animation-name: particle-drift; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.particle-motion-bob { animation-name: particle-bob; animation-timing-function: cubic-bezier(.35,0,.55,1); animation-iteration-count: infinite; }
+.particle-motion-sway { animation-name: particle-sway; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.particle-motion-pulse { animation-name: particle-pulse; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+
+@keyframes particle-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-7deg) scale(.94); opacity: .68; }
+  50% { transform: translate3d(7px, -19px, 0) rotate(9deg) scale(1.06); opacity: 1; }
+}
+@keyframes particle-spin {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-18deg) scale(.93); }
+  50% { transform: translate3d(5px, -12px, 0) rotate(18deg) scale(1.08); }
+}
+@keyframes particle-drift {
+  0%, 100% { transform: translate3d(-4px, 5px, 0) rotate(4deg); }
+  50% { transform: translate3d(15px, -14px, 0) rotate(-12deg); }
+}
+@keyframes particle-bob {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  38% { transform: translateY(-21px) scale(1.04, 1.08); }
+  68% { transform: translateY(-3px) scale(.98, .96); }
+}
+@keyframes particle-sway {
+  0%, 100% { transform: translateX(0) rotate(-13deg); }
+  50% { transform: translateX(10px) rotate(13deg); }
+}
+@keyframes particle-pulse {
+  0%, 100% { transform: scale(.82) rotate(-5deg); opacity: .62; }
+  50% { transform: scale(1.12) rotate(7deg); opacity: 1; }
+}
+
+/* Add this overlay inside a scene's section so it sits over the background,
+   but ensure the scene's actual text/cards use z-index: 2 or higher. */
+@media (max-width: 600px) {
+  .birthday-particle { opacity: .68; }
+  .birthday-particle:nth-child(3n) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .birthday-particle { animation: none !important; }
+}

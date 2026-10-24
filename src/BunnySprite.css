@@ -1,0 +1,81 @@
+/* One transparent sprite cell is 360 x 360 pixels. The atlas is 6 x 2. */
+.bunny-sprite-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  flex: 0 0 auto;
+  background-image: url("/bunny-sprite.png");
+  background-repeat: no-repeat;
+  background-size: 600% 200%;
+  background-position: var(--frame-x, 0%) var(--frame-y, 100%);
+}
+
+/* This anchor sets the bunny's page location. Only transform is animated,
+   so the bunny does not drift horizontally or change its CSS position. */
+.bunny-sprite-anchor {
+  position: absolute;
+  z-index: 4;
+  right: 3.5%;
+  bottom: 8.5%;
+  width: clamp(120px, 14vw, 190px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transform-origin: center bottom;
+  animation: bunny-sprite-hop 1.4s cubic-bezier(0.35, 0, 0.5, 1) infinite;
+}
+
+@keyframes bunny-sprite-hop {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(2deg) scale(1, 1);
+  }
+  18% {
+    transform: translate3d(0, -12px, 0) rotate(-4deg) scale(1.02, 1.04);
+  }
+  40% {
+    transform: translate3d(0, -39px, 0) rotate(2deg) scale(1, 1.02);
+  }
+  57% {
+    transform: translate3d(0, -32px, 0) rotate(5deg) scale(0.99, 1.03);
+  }
+  74% {
+    transform: translate3d(0, 0, 0) rotate(-3deg) scale(1.08, 0.91);
+  }
+  84% {
+    transform: translate3d(0, -4px, 0) rotate(2deg) scale(0.99, 1.03);
+  }
+}
+
+.bunny-sprite-heart {
+  position: absolute;
+  top: 6%;
+  right: 3%;
+  z-index: 2;
+  color: var(--pink, #ff69a6);
+  font-size: clamp(20px, 2.2vw, 30px);
+  line-height: 1;
+  -webkit-text-stroke: 1px var(--ink, #171717);
+  animation: bunny-sprite-heart-pop 1.4s ease-in-out infinite;
+}
+
+@keyframes bunny-sprite-heart-pop {
+  0%, 100% { transform: translateY(0) scale(0.9) rotate(-8deg); }
+  50% { transform: translateY(-9px) scale(1.16) rotate(8deg); }
+}
+
+@media (max-width: 600px) {
+  .bunny-sprite-anchor {
+    right: 2%;
+    bottom: 2%;
+    width: min(24vw, 100px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bunny-sprite-anchor,
+  .bunny-sprite-heart {
+    animation: none !important;
+    transform: none !important;
+  }
+}

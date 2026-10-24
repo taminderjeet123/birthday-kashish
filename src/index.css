@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #171717;
+  background: #fbf5e8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --yellow: #fff36d;
+  --pink: #ff69a6;
+  --orange: #ff5a1f;
+  --blue: #48c7e8;
+  --cream: #fbf5e8;
+  --ink: #171717;
+  --line: 2px solid var(--ink);
+  --shadow: 5px 5px 0 var(--ink);
+  --mono: "DM Mono", monospace;
+  --hand: "Permanent Marker", cursive;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid #171717;
+  outline-offset: 4px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: var(--ink);
+  background: var(--pink);
+}
